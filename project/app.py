@@ -3,8 +3,6 @@ import os
 
 app = Flask(__name__)
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Абсолютный путь к папке с app.py
-
 # Главная страница
 @app.route('/')
 def index():
@@ -18,29 +16,26 @@ def gift():
 # Кнопка 1 - фотографии
 @app.route('/photos')
 def photos():
-    photos_folder = os.path.join(BASE_DIR, 'static', 'basic')  # Абсолютный путь к static/basic
-    photo_files = os.listdir(photos_folder)
+    photo_files = os.listdir('static/basic')  # Папка с фотографиями
     return render_template('photos.html', photos=photo_files)
 
 # Кнопка 2 - цветочки с подписями
 @app.route('/flowers')
 def flowers():
-    flowers_folder = os.path.join(BASE_DIR, 'static', 'flowers')  # Абсолютный путь к static/flowers
-    flower_files = os.listdir(flowers_folder)
-    text_message = "your favorite bush roses and eustoma :) 💐"
+    flower_files = os.listdir('static/flowers')  # Папка с картинками цветочков
+    text_message = "your favorite bush roses and eustoma :) 💐"  # Здесь вставь текст, который хочешь показать
     return render_template('flowers.html', flowers=flower_files, text_message=text_message)
 
 # Кнопка 3 - песня с YouTube (новая ссылка)
 @app.route('/song')
 def song():
-    youtube_url = "https://www.youtube.com/embed/0VAAS9xnS5U"
+    youtube_url = "https://www.youtube.com/embed/0VAAS9xnS5U"  # ссылка на новую песню
     return render_template('song.html', url=youtube_url)
 
 # Кнопка 4 - текст из файла
 @app.route('/text')
 def text():
-    text_file_path = os.path.join(BASE_DIR, 'formylove.txt')  # Абсолютный путь к файлу formylove.txt
-    with open(text_file_path, 'r', encoding='utf-8') as f:
+    with open('formylove.txt', 'r', encoding='utf-8') as f:
         content = f.read()
     return render_template('text.html', content=content)
 
@@ -50,4 +45,5 @@ def no():
     return render_template('no.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # порт из окружения Render или 5000 по умолчанию
+    app.run(host="0.0.0.0", port=port, debug=True)
