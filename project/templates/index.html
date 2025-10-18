@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello My Love</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffeef8;
+            margin: 0;
+            padding: 20px;
+            position: relative; /* для нижней картинки */
+        }
+
+        h1 {
+            margin-top: 30px;
+        }
+
+        h3 {
+            margin-top: 10px;
+            color: #ff3366;
+        }
+
+        /* Главная картинка */
+        .main-img {
+            width: 250px;  /* уменьшенный размер */
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+
+        .main-img:hover {
+            transform: scale(1.05);
+        }
+
+        button {
+            margin: 15px;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            background-color: #ff6699;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #ff3366;
+        }
+
+        /* Маленькая картинка в нижнем правом углу */
+        .corner-img {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 80px;      /* маленький размер */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello My Love!</h1>
+    <h3>Do you want to see your gift?</h3>
+
+    <!-- Главная картинка -->
+    <img src="{{ url_for('static', filename='images/mygift.jpg') }}" alt="My Gift" class="main-img">
+
+    <div>
+        <a href="/gift"><button>Yes Please</button></a>
+        <a href="/no"><button>No Thanks</button></a>
+    </div>
+
+    <!-- Маленькая картинка в нижнем углу -->
+    <img src="{{ url_for('static', filename='basic/lovepink.jpg') }}" alt="Love Pink" class="corner-img">
+</body>
+</html>
