@@ -23,13 +23,13 @@ def photos():
 @app.route('/flowers')
 def flowers():
     flower_files = os.listdir('static/flowers')  # Папка с картинками цветочков
-    text_message = "your favorite bush roses and eustoma :) 💐"  # Здесь вставь текст, который хочешь показать
+    text_message = "your favorite bush roses and eustoma :) 💐"
     return render_template('flowers.html', flowers=flower_files, text_message=text_message)
 
-# Кнопка 3 - песня с YouTube (новая ссылка)
+# Кнопка 3 - песня с YouTube
 @app.route('/song')
 def song():
-    youtube_url = "https://www.youtube.com/embed/0VAAS9xnS5U"  # ссылка на новую песню
+    youtube_url = "https://www.youtube.com/embed/0VAAS9xnS5U"
     return render_template('song.html', url=youtube_url)
 
 # Кнопка 4 - текст из файла
@@ -44,5 +44,7 @@ def text():
 def no():
     return render_template('no.html')
 
+# Запуск сервера (обязательно для Render)
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
